@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listado de Alumnos</title>
+        <link rel="stylesheet" th:href="@{/css/styles.css}" />
+        <style>
+            body {
+                background-color: #f0f0f0;
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            .form-group{
+                margin-bottom: 15px;
+            }
+
+            h2 {
+                text-align: center;
+                color: #0d6efd;
+                margin-bottom: 20px;
+            }
+
+            .table-container {
+                max-width: 80%;
+                margin: auto;
+                background-color: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+
+            th, td {
+                text-align: left;
+                padding: 10px;
+            }
+
+            th {
+                background-color: #0078d4;
+                color: #ffffff;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            tr:hover {
+                background-color: #e0e7ff;
+            }
+
+            .button {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 10px 20px;
+                background-color: #0078d4;
+                color: #ffffff;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 16px;
+
+                text-align: center;
+            }
+
+            .button:hover {
+                background-color: #005a9e;
+            }
+
+            .action-buttons button {
+                margin-right: 10px;
+                padding: 5px 15px;
+                border: none;
+                border-radius: 5px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+
+            .btn-update {
+                background-color: #0d6efd;
+                color: white;
+            }
+
+            .btn-update:hover {
+                background-color: #084298;
+            }
+
+            .btn-delete {
+                background-color: #dc3545;
+                color: white;
+            }
+
+            .btn-delete:hover {
+                background-color: #a71d2a;
+            }
+            .center-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px
+            }
+            .btn-primary {
+                background-color: #0078d4; /* Azul estándar */
+                border: none;
+                border-radius: 20px;
+                font-size: 18px;
+                padding: 10px 20px;
+            } /* Tamaño mediano */
+            .btn-primary:hover {
+                background-color: #ffff33; /* Hover azul más oscuro */
+            }
+            input:hover{
+                border: 2px solid #14be69;
+                background-color: #88ca0d;
+                color: rgb(76, 6, 240);
+                cursor: pointer;
+            }
+            input:active{
+                background-color: #e5e90b;
+
+
+            }
+            .form-group{
+                margin-bottom: 15px;
+            }
+            input:hover{
+                border: 2px solid #14be69;
+                background-color: #88ca0d;
+                color: rgb(76, 6, 240);
+                cursor: pointer;
+            }
+            input:focus{
+                outline: none;
+            }
+            .botones-container {
+                display: flex;
+                justify-content: center;
+                gap: 10px; /* Espacio entre los botones */
+            }
+            button:hover{
+                background-color: #1baf8a;
+                color: rgb(28, 223, 38);
+                /*padding: 18px 20px; */
+            }
+            button:active{
+                background-color: #e66713;
+                color: #ffcc33;
+
+            }
+
+        </style>
+    </head>
+    <body>
+        <h2>Listado de Alumnos</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Edad</th>
+                        <th>Sexo</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Ciclo</th>
+                        <th>Facultad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="alumno : ${alumnos}">
+                        <td th:text="${alumno.nombre}"></td>
+                        <td th:text="${alumno.apellidos}"></td>
+                        <td th:text="${alumno.edad}"></td>
+                        <td th:text="${alumno.sexo}"></td>
+                        <td th:text="${alumno.fechaNacimiento}"></td>
+                        <td th:text="${alumno.ciclo}"></td>
+                        <td th:text="${alumno.facultad}"></td>
+
+                        <td class="action-buttons">
+                            <form th:action="@{/alumnos/actualizar}" method="post" style="display: inline;">
+                                <input type="hidden" name="id" th:value="${alumno.id}" />
+                                <button class="btn-update" type="submit">Actualizar</button>
+                            </form>
+                            <form th:action="@{/alumnos/eliminar}" method="post" style="display: inline;">
+                                <input type="hidden" name="id" th:value="${alumno.id}" />
+                                <button class="btn-delete" type="submit">Eliminar</button>
+
+
+
+                            </form>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="center-button"> 
+                <a href="/" class="btn btn-primary">Cerrar Sesión</a> </div>
+        </div>
+    </body>
+</html>
